@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: billify
+  datasource:
+    url: jdbc:mysql://localhost:3306/billify_db
+    username: root
+    password: 200875
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        format_sql: true
+  sql:
+    init:
+      mode: never
