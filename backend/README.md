@@ -47,7 +47,8 @@ spring:
         format_sql: true
   sql:
     init:
-      mode: never
+      mode: never * Change to 'true' the first time you run the app
+      continue-on-error: false
 ```
 
 ## ▶️ Run the App
