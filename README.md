@@ -1,4 +1,4 @@
-# Billify - Customer & Invoice Management System
+# Billify — Customer & Invoice Management System
 
 Billify is a full-stack business application designed to manage customers and invoices efficiently. The project is built using **Java** with **Spring Boot** for the backend, **Angular** for the frontend, and **MySQL** as the relational database.
 
@@ -15,13 +15,13 @@ Billify is a full-stack business application designed to manage customers and in
 
 ## 🛠️ Technologies
 
-| Layer      | Stack                        |
-|-----------|------------------------------|
-| Backend   | Java, Spring Boot, Spring Security |
-| Frontend  | Angular                      |
-| Database  | MySQL                        |
-| Auth      | JWT, Refresh Tokens, 2FA     |
-| DevOps    | Docker (optional), Postman   |
+| Layer    | Stack                                     |
+|----------|-------------------------------------------|
+| Backend  | Java, Spring Boot                         |
+| Frontend | Angular                                   |
+| Database | MySQL                                     |
+| Auth     | JWT, Refresh Tokens, 2FA, Spring Security |
+| DevOps   | Docker (optional), Postman                |
 
 ## 📸 Screenshots
 
