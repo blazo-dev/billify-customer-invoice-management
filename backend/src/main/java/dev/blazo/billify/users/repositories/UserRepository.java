@@ -19,7 +19,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     /**
-     * Custom queries to find a users by email.
+     * Custom queries to find a user by email.
      *
      * @param email the email to search for
      * @return an Optional of the users if found, otherwise an empty Optional
@@ -27,7 +27,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     /**
-     * Custom queries to check if a users exists by their email.
+     * Custom queries to check if a user exists by their email.
      *
      * @param email the email to check
      * @return {@code true} if a users exists with the given email, otherwise {@code false}
