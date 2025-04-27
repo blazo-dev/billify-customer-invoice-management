@@ -16,7 +16,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 /**
  * Represents a User entity in the system.
- * This class is used to manage users data such as personal information, account status, and authentication details.
+ * This class is used to manage user data such as personal information, account status, and authentication details.
  * It includes validation annotations to ensure correct data is stored, as well as automatic inclusion
  * of non-null fields in the JSON response.
  *
@@ -29,7 +29,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(NON_NULL)  // Only include non-null fields in the serialized JSON response
-@Entity(name = "users")  // This defines the JPA entity, mapping to the 'users' table in the database
+@Entity  // This defines the JPA entity, mapping to the 'users' table in the database
+@Table(name = "users")  // Specifies the name of the table in the database
 public class User {
 
     /**

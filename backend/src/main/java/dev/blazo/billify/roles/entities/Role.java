@@ -26,7 +26,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(NON_DEFAULT)  // Only include non-default fields in the serialized JSON response
-@Entity(name = "roles")  // Maps the entity to the 'roles' table in the database
+@Entity  // Maps the entity to the 'roles' table in the database
+@Table(name = "roles")  // Specifies the name of the table in the database
 public class Role {
 
     /**
