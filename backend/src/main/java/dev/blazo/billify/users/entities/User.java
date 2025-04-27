@@ -10,7 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -142,7 +142,7 @@ public class User {
      */
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)  // Defines the field as a timestamp in the database
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     /**
      * Sets the creation date of the user account before persisting the entity.
@@ -152,7 +152,7 @@ public class User {
     @PrePersist
     public void prePersist() {
         if (this.createdAt == null) {
-            this.createdAt = new Date();  // Set the creation date if not already set
+            this.createdAt = LocalDateTime.now();  // Set the creation date if not already set
         }
     }
 }

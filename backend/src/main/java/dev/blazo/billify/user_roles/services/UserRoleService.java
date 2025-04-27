@@ -37,6 +37,17 @@ public class UserRoleService {
     }
 
     /**
+     * Find a UserRole by roleId.
+     *
+     * @param roleId The ID of the role.
+     * @return The UserRole if found, or null if not.
+     */
+    public UserRole findByRoleId(Long roleId) {
+        Optional<UserRole> userRole = userRoleRepository.findByRoleId(roleId);
+        return userRole.orElse(null);
+    }
+
+    /**
      * Find a UserRole by userId and roleId.
      *
      * @param userId The ID of the user.

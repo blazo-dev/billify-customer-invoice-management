@@ -26,6 +26,14 @@ public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
     Optional<UserRole> findByUserId(Long userId);
 
     /**
+     * Find a UserRole by its role ID.
+     *
+     * @param roleId The ID of the role.
+     * @return An Optional containing the UserRole if found, or empty if not.
+     */
+    Optional<UserRole> findByRoleId(Long roleId);
+
+    /**
      * Find a UserRole by its user and role IDs.
      * This can be useful to check if a specific role is assigned to a specific user.
      *
