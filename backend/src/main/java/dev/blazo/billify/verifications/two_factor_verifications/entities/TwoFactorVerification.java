@@ -1,4 +1,4 @@
-package dev.blazo.billify.account_verifications.entities;
+package dev.blazo.billify.verifications.two_factor_verifications.entities;
 
 import dev.blazo.billify.users.entities.User;
 import jakarta.persistence.*;
@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.time.LocalDateTime;
 
 /**
  * @author Bryan Lazo (<a href="https://blazo-dev.vercel.app">...</a>)
@@ -18,8 +20,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "account_verifications")
-public class AccountVerification {
+@Table(name = "two_factor_verifications")
+public class TwoFactorVerification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +31,10 @@ public class AccountVerification {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    @Size(max = 255, message = "Account verification url must be at most 255 characters")
+    @Size(max = 10, message = "Verification code must be at most 255 characters")
     @Column(unique = true)
-    private String url;
+    private String code;
+
+    @Column(name = "expiration_date", nullable = false)
+    private LocalDateTime expirationDate;
 }

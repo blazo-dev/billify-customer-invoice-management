@@ -1,6 +1,6 @@
-package dev.blazo.billify.reset_password_verifications.repositories;
+package dev.blazo.billify.verifications.reset_password_verifications.repositories;
 
-import dev.blazo.billify.reset_password_verifications.entities.ResetPasswordVerification;
+import dev.blazo.billify.verifications.reset_password_verifications.entities.ResetPasswordVerification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

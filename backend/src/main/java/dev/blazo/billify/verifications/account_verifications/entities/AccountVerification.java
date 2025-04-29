@@ -1,4 +1,4 @@
-package dev.blazo.billify.reset_password_verifications.entities;
+package dev.blazo.billify.verifications.account_verifications.entities;
 
 import dev.blazo.billify.users.entities.User;
 import jakarta.persistence.*;
@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDateTime;
 
 /**
  * @author Bryan Lazo (<a href="https://blazo-dev.vercel.app">...</a>)
@@ -20,8 +18,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "reset_password_verifications")
-public class ResetPasswordVerification {
+@Table(name = "account_verifications")
+public class AccountVerification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +29,7 @@ public class ResetPasswordVerification {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    @Size(max = 255, message = "Reset password verification url must be at most 255 characters")
+    @Size(max = 255, message = "Account verification url must be at most 255 characters")
     @Column(unique = true)
     private String url;
-
-    @Column(nullable = false)
-    private LocalDateTime expirationDate;
 }

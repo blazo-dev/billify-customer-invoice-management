@@ -63,10 +63,9 @@ public class UserRoleService {
      * Save a new UserRole to the database.
      *
      * @param userRole The UserRole entity to save.
-     * @return The saved UserRole entity.
      */
-    public UserRole save(UserRole userRole) {
-        return userRoleRepository.save(userRole);
+    public void save(UserRole userRole) {
+        userRoleRepository.save(userRole);
     }
 
     /**

@@ -1,4 +1,4 @@
-package dev.blazo.billify.two_factor_verifications.entities;
+package dev.blazo.billify.verifications.reset_password_verifications.entities;
 
 import dev.blazo.billify.users.entities.User;
 import jakarta.persistence.*;
@@ -20,8 +20,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "two_factor_verifications")
-public class TwoFactorVerification {
+@Table(name = "reset_password_verifications")
+public class ResetPasswordVerification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +31,10 @@ public class TwoFactorVerification {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    @Size(max = 10, message = "Verification code must be at most 255 characters")
+    @Size(max = 255, message = "Reset password verification url must be at most 255 characters")
     @Column(unique = true)
-    private String code;
+    private String url;
 
-    @Column(name = "expiration_date", nullable = false)
+    @Column(nullable = false)
     private LocalDateTime expirationDate;
 }

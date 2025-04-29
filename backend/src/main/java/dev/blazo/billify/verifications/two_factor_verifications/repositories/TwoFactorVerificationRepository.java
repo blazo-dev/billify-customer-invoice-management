@@ -1,6 +1,6 @@
-package dev.blazo.billify.two_factor_verifications.repositories;
+package dev.blazo.billify.verifications.two_factor_verifications.repositories;
 
-import dev.blazo.billify.two_factor_verifications.entities.TwoFactorVerification;
+import dev.blazo.billify.verifications.two_factor_verifications.entities.TwoFactorVerification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

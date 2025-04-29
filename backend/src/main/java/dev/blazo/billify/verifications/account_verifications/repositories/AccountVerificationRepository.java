@@ -1,6 +1,6 @@
-package dev.blazo.billify.account_verifications.repositories;
+package dev.blazo.billify.verifications.account_verifications.repositories;
 
-import dev.blazo.billify.account_verifications.entities.AccountVerification;
+import dev.blazo.billify.verifications.account_verifications.entities.AccountVerification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
