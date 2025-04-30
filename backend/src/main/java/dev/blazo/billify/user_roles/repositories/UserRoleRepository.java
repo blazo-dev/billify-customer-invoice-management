@@ -2,6 +2,8 @@ package dev.blazo.billify.user_roles.repositories;
 
 import dev.blazo.billify.user_roles.entities.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -42,4 +44,13 @@ public interface UserRoleRepository extends JpaRepository<UserRole, Long> {
      * @return An Optional containing the UserRole if found, or empty if not.
      */
     Optional<UserRole> findByUserIdAndRoleId(Long userId, Long roleId);
+
+    /**
+     * Finds a UserRole entity by the email address associated with the user.
+     *
+     * @param email The email address of the user.
+     * @return An Optional containing the UserRole if found, or empty if not.
+     */
+    @Query("SELECT ur FROM UserRole ur WHERE ur.user.email = :email")
+    Optional<UserRole> findByUserEmail(@Param("email") String email);
 }

@@ -1,11 +1,13 @@
 package dev.blazo.billify.user_roles.services;
 
+import dev.blazo.billify.common.exceptions.ApiException;
+import dev.blazo.billify.roles.entities.Role;
+import dev.blazo.billify.roles.services.RoleService;
 import dev.blazo.billify.user_roles.entities.UserRole;
 import dev.blazo.billify.user_roles.repositories.UserRoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.blazo.billify.users.entities.User;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 /**
  * Service class for managing UserRole.
@@ -16,14 +18,11 @@ import java.util.Optional;
  * @since 4/27/2025
  */
 @Service
+@RequiredArgsConstructor
 public class UserRoleService {
 
     private final UserRoleRepository userRoleRepository;
-
-    @Autowired
-    public UserRoleService(UserRoleRepository userRoleRepository) {
-        this.userRoleRepository = userRoleRepository;
-    }
+    private final RoleService roleService;
 
     /**
      * Find a UserRole by userId.
@@ -32,8 +31,17 @@ public class UserRoleService {
      * @return The UserRole if found, or null if not.
      */
     public UserRole findByUserId(Long userId) {
-        Optional<UserRole> userRole = userRoleRepository.findByUserId(userId);
-        return userRole.orElse(null);
+        return userRoleRepository.findByUserId(userId).orElseThrow(() -> new ApiException("User role not found for userId: " + userId));
+    }
+
+    /**
+     * Find a UserRole by user email.
+     *
+     * @param userEmail The email of the user.
+     * @return The UserRole if found, or null if not.
+     */
+    public UserRole findByUserEmail(String userEmail) {
+        return userRoleRepository.findByUserEmail(userEmail).orElseThrow(() -> new ApiException("User role not found for email: " + userEmail));
     }
 
     /**
@@ -43,20 +51,7 @@ public class UserRoleService {
      * @return The UserRole if found, or null if not.
      */
     public UserRole findByRoleId(Long roleId) {
-        Optional<UserRole> userRole = userRoleRepository.findByRoleId(roleId);
-        return userRole.orElse(null);
-    }
-
-    /**
-     * Find a UserRole by userId and roleId.
-     *
-     * @param userId The ID of the user.
-     * @param roleId The ID of the role.
-     * @return The UserRole if found, or null if not.
-     */
-    public UserRole findByUserIdAndRoleId(Long userId, Long roleId) {
-        Optional<UserRole> userRole = userRoleRepository.findByUserIdAndRoleId(userId, roleId);
-        return userRole.orElse(null);
+        return userRoleRepository.findByRoleId(roleId).orElseThrow(() -> new ApiException("User role not found for roleId: " + roleId));
     }
 
     /**
@@ -74,7 +69,40 @@ public class UserRoleService {
      * @param userId The ID of the user whose UserRole is to be deleted.
      */
     public void deleteByUserId(Long userId) {
-        userRoleRepository.findByUserId(userId)
-                .ifPresent(userRoleRepository::delete);
+        userRoleRepository.findByUserId(userId).ifPresent(userRoleRepository::delete);
+    }
+
+    /**
+     * Updates the role of a user by changing the associated roleId.
+     *
+     * @param userId  The ID of the user whose role will be updated.
+     * @param newRole The new Role entity to assign.
+     * @throws ApiException if the user role is not found or the update fails.
+     */
+    public void updateUserRole(Long userId, Role newRole) {
+        UserRole userRole = findByUserId(userId);
+
+        userRole.setRole(newRole);
+        userRoleRepository.save(userRole);
+    }
+
+    /**
+     * Assigns a specific role to a user by creating and saving a UserRole entity.
+     * The method retrieves the role by its name and associates it with the given user.
+     *
+     * @param user     the User entity to which the role will be assigned
+     * @param roleName the name of the role to be assigned to the user
+     * @throws ApiException if there is an error during the role assignment process
+     */
+    public void assignRoleToUser(User user, String roleName) throws ApiException {
+        try {
+            Role role = roleService.findByName(roleName);
+
+            UserRole userRole = UserRole.builder().user(user).role(role).build();
+
+            save(userRole);
+        } catch (Exception e) {
+            throw new ApiException("Failed to assign default user role: " + e.getMessage());
+        }
     }
 }

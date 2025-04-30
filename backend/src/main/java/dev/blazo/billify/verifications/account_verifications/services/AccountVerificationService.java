@@ -1,8 +1,10 @@
 package dev.blazo.billify.verifications.account_verifications.services;
 
+import dev.blazo.billify.common.exceptions.ApiException;
+import dev.blazo.billify.users.entities.User;
 import dev.blazo.billify.verifications.account_verifications.entities.AccountVerification;
 import dev.blazo.billify.verifications.account_verifications.repositories.AccountVerificationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,17 +13,29 @@ import org.springframework.stereotype.Service;
  * @since 4/28/2025
  */
 @Service
+@RequiredArgsConstructor
 public class AccountVerificationService {
 
     private final AccountVerificationRepository accountVerificationRepository;
 
-    @Autowired
-    public AccountVerificationService(AccountVerificationRepository accountVerificationRepository) {
-        this.accountVerificationRepository = accountVerificationRepository;
-    }
-
-
     public void save(AccountVerification accountVerification) {
         this.accountVerificationRepository.save(accountVerification);
+    }
+
+    /**
+     * Creates and saves an AccountVerification entity for the given user and verification URL.
+     *
+     * @param user            the user to associate with the verification
+     * @param verificationUrl the URL to be saved in the verification entity
+     * @throws ApiException if saving, the account verification fails
+     */
+    public void createAndSaveAccountVerification(User user, String verificationUrl) {
+        try {
+            AccountVerification accountVerification = AccountVerification.builder().user(user).url(verificationUrl).build();
+
+            save(accountVerification);
+        } catch (Exception e) {
+            throw new ApiException("Failed to create account verification: " + e.getMessage());
+        }
     }
 }

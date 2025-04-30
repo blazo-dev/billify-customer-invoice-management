@@ -1,9 +1,9 @@
 package dev.blazo.billify.roles.services;
 
-import dev.blazo.billify.common.exception.ApiException;
+import dev.blazo.billify.common.exceptions.ApiException;
 import dev.blazo.billify.roles.entities.Role;
 import dev.blazo.billify.roles.repositories.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,15 +20,10 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@RequiredArgsConstructor
 public class RoleService {
 
     private final RoleRepository roleRepository;
-
-    @Autowired
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
 
     /**
      * Retrieves a Role entity by its name. If the role is not found, an ApiException is thrown.

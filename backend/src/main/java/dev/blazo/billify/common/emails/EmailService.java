@@ -1,7 +1,8 @@
-package dev.blazo.billify.common.email;
+package dev.blazo.billify.common.emails;
 
 import dev.blazo.billify.users.entities.User;
 import dev.blazo.billify.verifications.enums.VerificationType;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
  * @since 4/29/2025
  */
 @Service
+@RequiredArgsConstructor
 public class EmailService {
 
     public void sendVerificationUrlEmail(User user, String url, VerificationType vetificationType) {
