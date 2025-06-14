@@ -74,4 +74,6 @@ public class SecurityConfig {
         authProvider.setUserDetailsService(null);
         return new ProviderManager(authProvider);
     }
+
+    // Pull request example
 }
