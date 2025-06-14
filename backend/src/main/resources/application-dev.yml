@@ -1,0 +1,38 @@
+# Spring Boot Application Configuration
+spring:
+  application:
+    name: billify  # Name of the application
+
+  # Database configuration (data source)
+  datasource:
+    url: jdbc:mysql://localhost:3306/billify_db?serverTimezone=America/Chicago  # MySQL database connection URL
+    username: root  # Database username
+    password: 200875  # Database password
+  
+  # JPA (Java Persistence API) configuration
+  jpa:
+    generate-ddl: true  # Automatically generate DDL (schema creation) if necessary
+    show-sql: true  # Show the SQL queries generated in the console
+    hibernate:
+      ddl-auto: update  # Automatically update the schema on startup (not recommended for production)
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true  # Quote all identifiers globally in the database
+        format_sql: true  # Format SQL queries for better readability
+  
+  # SQL initialization configuration
+  sql:
+    init:
+      mode: never  # Do not run any SQL initialization scripts on application startup
+      continue-on-error: false  # Do not continue if there are errors in SQL initialization
+
+# Server port configuration (optional)
+server:
+  port: 8080  # The port where the application will listen to (can be changed as needed)
+
+# Logging configuration (optional)
+logging:
+  level:
+    root: INFO  # Set the logging level to INFO globally
+    org.hibernate.SQL: DEBUG  # Show Hibernate SQL queries for debugging
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Show SQL parameters for Hibernate queries
